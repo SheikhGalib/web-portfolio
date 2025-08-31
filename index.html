@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-label">Dark Mode</span>
+    </button>
+    <header>
+        <nav>
+            <div class="logo">My Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>Welcome to My Portfolio</h1>
+            <p>Hello! I'm a web developer with a passion for creating beautiful and functional websites.</p>
+        </section>
+        <section id="about" class="card">
+            <h2>About Me</h2>
+            <p>Hello! I'm a web developer with a passion for creating beautiful and functional websites.</p>
+        </section>
+        <section id="projects">
+            <h2>My Projects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Project 1</h3>
+                    <p>Short description of Project 1.</p>
+                    <a href="project1.html" class="btn">View Project</a>
+                </div>
+                <div class="card">
+                    <h3>Project 2</h3>
+                    <p>Short description of Project 2.</p>
+                    <a href="project2.html" class="btn">View Project</a>
+                </div>
+                <div class="card">
+                    <h3>Project 3</h3>
+                    <p>Short description of Project 3.</p>
+                    <a href="project3.html" class="btn">View Project</a>
+                </div>
+            </div>
+        </section>
+        <section id="contact" class="card">
+            <h2>Contact Me</h2>
+            <p>If you'd like to get in touch, please email me at <a
+                    href="mailto:yourname@example.com">yourname@example.com</a>.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 My Web Portfolio</p>
+    </footer>
+    <script>
+        // Theme toggle script
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeLabel = document.getElementById('theme-label');
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            if (theme === 'light') {
+                themeIcon.textContent = '☀️';
+                themeLabel.textContent = 'Light Mode';
+            } else {
+                themeIcon.textContent = '🌙';
+                themeLabel.textContent = 'Dark Mode';
+            }
+            localStorage.setItem('theme', theme);
+        }
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+        // On load
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+    </script>
+</body>
+
+</html>
