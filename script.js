@@ -33,7 +33,7 @@ function openSocialLink(platform) {
     const socialLinks = {
         github: 'https://github.com/SheikhGalib', // Replace with your GitHub profile
         facebook: 'https://www.facebook.com/SheikhGalib01', // Replace with your Facebook profile
-        instagram: 'https://x.com/Scipher_Tech', // Replace with your Instagram profile
+        x: 'https://x.com/Scipher_Tech', // Replace with your X (Twitter) profile
         linkedin: 'https://www.linkedin.com/in/sheikhgalib' // Replace with your LinkedIn profile
     };
     
