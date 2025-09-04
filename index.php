@@ -1,3 +1,11 @@
+<?php
+// Include the project manager
+require_once 'includes/project_manager.php';
+
+// Get projects and services from database
+$projects = $projectManager->getAllProjects(true); // Only featured projects
+$services = $projectManager->getAllServices(true); // Only featured services
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,44 +89,16 @@
         <h2 class="heading">Services</h2>
         <div class="services-container">
 
-            <div class="service-box">
-                <div class="service-info">
-                    <i class="bx bxl-figma"></i>
-                    <h4>UI/UX Design</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur,
-                        adipisicing elit. Eum dolor praesentium
-                        reprehenderit totam sed hic earum, molestias
-                        esse inventore, numquam nihil excepturi?
-                        Totam nihil molestiae exercitationem sunt
-                        sint possimus odit.</p>
+            <?php foreach ($services as $service): ?>
+                <div class="service-box">
+                    <div class="service-info">
+                        <i class="<?php echo htmlspecialchars($service['icon_class']); ?>"></i>
+                        <h4><?php echo htmlspecialchars($service['title']); ?></h4>
+                        <p><?php echo htmlspecialchars($service['description']); ?></p>
+                    </div>
                 </div>
-            </div>
+            <?php endforeach; ?>
 
-            <div class="service-box">
-                <div class="service-info">
-                    <i class="bx bx-code"></i>
-                    <h4>Web Development</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur,
-                        adipisicing elit. Eum dolor praesentium
-                        reprehenderit totam sed hic earum, molestias
-                        esse inventore, numquam nihil excepturi?
-                        Totam nihil molestiae exercitationem sunt
-                        sint possimus odit.</p>
-                </div>
-            </div>
-
-            <div class="service-box">
-                <div class="service-info">
-                    <i class="bx bxl-python"></i>
-                    <h4>Python Developer</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur,
-                        adipisicing elit. Eum dolor praesentium
-                        reprehenderit totam sed hic earum, molestias
-                        esse inventore, numquam nihil excepturi?
-                        Totam nihil molestiae exercitationem sunt
-                        sint possimus odit.</p>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -128,54 +108,36 @@
 
         <div class="projects-box">
 
-            <div class="project-card">
-                <img src="images/project1.png" alt="project image">
-                <div class="project-info">
-                    <h3>Project 1</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Quisquam, quod.</p>
-                    <div class="btn">Review project</div>
-                </div>
-            </div>
+            <?php foreach ($projects as $project): ?>
+                <div class="project-card">
+                    <img src="<?php echo htmlspecialchars($project['image_path']) . '?v=' . strtotime($project['updated_at']); ?>"
+                        alt="<?php echo htmlspecialchars($project['title']); ?>">
+                    <div class="project-info">
+                        <h3><?php echo htmlspecialchars($project['title']); ?></h3>
+                        <p><?php echo htmlspecialchars($project['description']); ?></p>
 
-            <div class="project-card">
-                <img src="images/project2.png" alt="project image">
-                <div class="project-info">
-                    <h3>Project 2</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Quisquam, quod.</p>
-                    <div class="btn">Review project</div>
-                </div>
-            </div>
+                        <div class="project-buttons">
+                            <?php if (!empty($project['github_link'])): ?>
+                                <a href="<?php echo htmlspecialchars($project['github_link']); ?>" target="_blank"
+                                    class="btn project-btn">View Code</a>
+                            <?php endif; ?>
 
-            <div class="project-card">
-                <img src="images/project3.png" alt="project image">
-                <div class="project-info">
-                    <h3>Project 3</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Quisquam, quod.</p>
-                    <div class="btn">Review project</div>
-                </div>
-            </div>
+                            <?php if (!empty($project['live_demo_link'])): ?>
+                                <a href="<?php echo htmlspecialchars($project['live_demo_link']); ?>" target="_blank"
+                                    class="btn project-btn">Live Demo</a>
+                            <?php endif; ?>
+                        </div>
 
-            <div class="project-card">
-                <img src="images/project4.png" alt="project image">
-                <div class="project-info">
-                    <h3>Project 4</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Quisquam, quod.</p>
-                    <div class="btn">Review project</div>
+                        <?php if (!empty($project['technologies'])): ?>
+                            <div class="project-tech">
+                                <span class="tech-label">Technologies:</span>
+                                <span class="tech-list"><?php echo htmlspecialchars($project['technologies']); ?></span>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                 </div>
-            </div>
-            <div class="project-card">
-                <img src="images/project5.png" alt="project image">
-                <div class="project-info">
-                    <h3>Project 5</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Quisquam, quod.</p>
-                    <div class="btn">Review project</div>
-                </div>
-            </div>
+            <?php endforeach; ?>
+
         </div>
     </section>
 
